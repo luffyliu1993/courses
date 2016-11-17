@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="utf-8">
+        <title>Comment Course</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            #container{
+                width: 600px;
+                margin: 0 auto;
+            }
+                #course_name{
+                    font-size: 30pt;
+                    font-weight: bolder;
+                }
+                    .comment{
+                        font-size: 18pt;
+                        margin-left: 30px;
+                    }
+                form{
+                    margin-top: 20px;
+                }
+                    form textarea{
+                        width: 500px;
+                        height: 80px;
+                        margin-left: 30px;
+                        overflow-y: auto;
+                    }
+                    form input{
+                        display: block;
+                        margin-left: 330px;
+                        width: 200px;
+                        text-align: center;
+                        background-color: blue;
+                        color: white;
+                        font-size: 15pt;
+                    }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <p id="course_name">
+                {{course_name}}
+            </p>
+            {% for comment in comments%}
+                <p class='comment'>
+                    {{comment.comment}}
+                </p>
+            {% endfor %}
+            <form action='/add_comment/{{course_id}}'  method="POST">
+                {% csrf_token %}
+                <textarea name='comment'></textarea>
+                <input type='submit' value='Post a comment' />
+            </form>
+            <form action="/" method="GET">
+                <input type='submit' value='Go Back' />
+            </form>
+        </div>
+    </body>
+</html>

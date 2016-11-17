@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="utf-8">
+        <title>Delete Course</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            div{
+                width: 650px;
+                margin: 0 auto;
+                position: relative;
+                margin-top: 20px;
+            }
+                div h1{
+                    font-weight: bolder;
+                    font-size: 20pt;
+                }
+                span.course{
+                    position: absolute;
+                    left: 15%;
+                    display: inline-block;
+                }
+                form{
+                    display: inline-block;
+                }
+                    #button1{
+                        background-color: grey;
+                        width: 40px;
+                        margin-left: 30px;
+                    }
+                    #button2{
+                        background-color: red;
+                        color: white;
+                        margin-left: 20px;
+                        width: 200px;
+                    }
+                    #button1, #button2{
+                        text-align: center;
+                        margin-top: 10px;
+                    }
+                p{
+                    margin-top: 10px;
+                }
+
+        </style>
+    </head>
+    <body>
+        <div>
+            {% csrf_token %}
+            <h1>Are you sure you want to delete the following course?</h1>
+            <p>
+                <span>Name:</span> <span class='course'>{{course.course_name}}</span>
+            </p>
+            <p>
+                <span>Description:</span> <span class='course'>{{course.description}}</span>
+            </p>
+            <form action='/delete_course/{{course.id}}' method='GET'>
+                <input id="button1" type='submit' value='No' name='action'/>
+            </form>
+            <form action='/delete_course/{{course.id}}' method='GET'>
+                <input id='button2' type='submit' value='Yes! I want to delete this' name='action'/>
+            </form>
+        </div>
+    </body>
+</html>
